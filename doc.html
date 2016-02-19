@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!-- saved from url=(0067)https://www.fit.vutbr.cz/study/courses/IIS/private/projekt/doc.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"> <!-- ISO-8859-2 -->
+    
+    <title>INFORMAČNÉ SYSTÉMY</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+
+<h1>Zadanie - Internetový obchod papierníctvo</h1>
+
+<dl>
+	<dt>Autori</dt>
+	<dd>Matúš Ondris
+	    <a href="mailto:xondri04@stud.fit.vutbr.cz">xondri04@stud.fit.vutbr.cz</a> -
+		databázový systém a PHP skripty
+	</dd>
+	<dd>Jiří Antoš
+	    <a href="mailto:xantos03@stud.fit.vutbr.cz">xantos03@stud.fit.vutbr.cz</a> - 
+		databázový systém a užívateľské rozhranie
+	</dd>
+	<dt>Adresa aplikácie URL</dt>
+	<dd><a href="http://iis.webinator.sk/index.php">http://iis.webinator.sk/index.php</a></dd>
+</dl>
+
+<h2>Testovací používatelia systému</h2>
+<table>
+<tbody><tr><th>Prihlasovacie meno</th><th>Heslo</th><th>Funkcia</th></tr>
+<tr><td>administrator</td><td>admin123</td><td>Administrátor</td></tr>
+<tr><td>uzivatel1</td><td>user123</td><td>Užívateľ</td></tr>
+</tbody></table>
+
+<h2>Implementácia</h2>
+<p>Podľa diagramu použitia z predmetu IDS sa nám podarilo implementovať takmer každú akciu aktérov systému. Snažili sme sa dodržať návrh ER diagramu z predmetu IDS , avšak niektoré atribúty sme museli zmeniť a niektoré pridať.</p>
+<p>Čo, vyplývajúce z use-case diagramu sme neimplementovali:</p>
+<ul>
+<li>Zamestnanec - obľúbenosť tovaru</li>
+<li>Zamestnanec - zobrazenie predajnosti tovaru</li>
+</ul>
+<p>Rozhodli sme sa neimplementovať obľúbenosť tovaru len u zamestnanca, lebo nám prišlo logické , aby každý užívateľ mal sprístupnenú možnosť vidiet obľúbenosť daného tovaru.</p>
+<p>Taktiež sme sa rozhodli neimplementovať zobrazenie predajnosti tovaru u zamestnanca kvôli tomu , že to vyplýva zo zoznamu predaných položiek a keďže s nimi pracuje každý deň zdalo sa nám to zbytočné.</p>
+<p>čo sme sa rozhodli doimplementovať a nenachádzalo sa to v use-case diagrame:</p>
+<ul>
+<li>Zákazník, zamestnanec - tlačenie faktúr</li>
+<li>Zákazník, zamestnanec - sledovanie stavu objednávky</li>
+<li>Zákazník, zamestnanec - zmenenie emailu</li>
+<li>Zákazník, zamestnanec - prezeranie objednávok</li>
+<li>Zákazník, zamestnanec - zobrazenie hodnotenia produktov</li>
+<li>Zákazník, zamestnanec - zmenenie hesla</li>
+</ul>
+<p>Administrátorovi sme pridelili plné práva na správu a úpravu informačného systému, udržiava a aktualizuje celý informačný systém. V našom návrhu informačńeho systému administrátor predstavuje taktiež rolu zamestnanca ,keďže sa jedná o malý systém rozhodli sme sa že nieje nutný väčší počet zamestnancov.</p>
+<p>Hlavným súborom informaňého systému je index.php ktorý slúži na načítanie celého systému. Tento skript načíta všetky PHP súbory, ktoré sme implementovali pre náš systém.</p>
+<p>Systém má naviac implementovanú sekciu môj účet, kde si zákazník a taktiež aj administrátor môže pozrieť informácie o svojom účte, ktoré zadal do systému. V záložke kontakt je možné nájsť kontaktné údaje nášho informačného systému.</br>
+Kapacita položiek dostupných na sklade sa mení po každej objednávke zákazníka alebo dodaní zbožia do sklad. V sidebare sme vytvorili záložku Košík, kde po vložení produktov do košíka pri nakupovaní si zákazník môže zobraziť položky, ktoré tam vložil.</br>
+Systém dovoľuje taktiež aj nezaregistrovaným užívateľom vkladať položky do košíka, avšak dokončiť nákup je možné až po prihlásení.SQL skript pre vytvorenie a naplnenie databázy je možné nájsť v priečinku pomenovanom sql.</p>
+<p><b>Detail PHP skriptov</b></p>
+<p>V priečinku views je umiestnená väčšina súborov, ktoré sú spúštané súborom index.php. Zastávajú hlavne funkciu tvorenia formulárov a celkového vzhľadu stránky. Taktiež sú z týchto súborov volané ďalšie súbory z koreňového adresára pre prácu</br>
+s databázou a získanými dátami (UPDATE, INSERT). Hlavným súborom je index.php, ktorý sa nachádza v koreňovom adresári a spúšťa všetky funkcie(skripty) systému. V koreňovom adresári sa nachádza aj súbor</br>
+connect.php, ktorý slúži na pripojenie k mysql databáze.</p>
+<p><b>HTML súbory a Javascript</b></p>
+<p>Všetok HTML kód v našom systéme je súčasťou PHP skriptou. Je pridávaný do premenných triedy PageData, ktoré sú volané v template page.php.</br>
+Javascript je použitý minimálne a síce len u tlačenia faktúr.</p>
+<p><b>CSS</b></p>
+<p>Vzhľad webstránky definuje súbor style.css, ktorý je umiestnení v adresári css. Obrázky sú umiestnené v podadresáry images.</p>
+<h2>Inštalácia</h2>
+<ul>
+<li>Všetky súbory skopírujte na server</li>
+<li>Softwarové požiadavky: PHP 5.3, MySQL 5.0</li>
+<li>Pomocou sql súboru zo zložky databaza nahrajte položky do databázy</li>
+</ul>
+
+<h2>Problémy</h2>
+<p>Pokúšali sme sa implementovať HTML5 a CSS3, ale v niektorých prehliadačoch, hlavne starších verzií vznikali problémy s rozmiestnením prvkov stránky. Boli to len minimálne chyby, ale vďaka ním sme sa rozhodli impleemntovať systém</br>
+v základnom HTML a CSS kóde.</p>
+
+</body></html>
